@@ -185,7 +185,7 @@ const MapView = ({ center = { lat: 51.505, lng: -0.09 }, zoom = 3 }: MapViewProp
 
       {/* Location Details Sidebar */}
       {isSidebarOpen && selectedMarker && (
-        <div className="fixed inset-y-0 right-0 z-20 w-64 bg-white dark:bg-gray-800 shadow-lg transform transition-transform duration-300 ease-in-out">
+        <div className="fixed inset-y-0 right-0 z-50 w-64 bg-white dark:bg-gray-800 shadow-lg transform transition-transform duration-300 ease-in-out">
           <div className="h-full flex flex-col">
             <div className="p-4 border-b">
               <div className="flex justify-between items-center">
