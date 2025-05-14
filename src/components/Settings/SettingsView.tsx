@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
+import WalletSection from './WalletSection';
 
 const SettingsView = () => {
   const navigate = useNavigate();
@@ -41,6 +42,9 @@ const SettingsView = () => {
           <Button variant="outline" size="sm">Edit Profile</Button>
         </div>
       </Card>
+      
+      {/* Wallet Section */}
+      <WalletSection />
       
       <Card className="p-4 space-y-4">
         <h2 className="font-semibold text-lg">Preferences</h2>
