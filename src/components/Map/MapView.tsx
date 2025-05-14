@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { toast } from 'sonner';
-import { MapPin, MessageSquare, ArrowRight } from 'lucide-react';
+import { MapPin, MessageSquare, ArrowRight, X } from 'lucide-react';
 import {
   Sidebar,
   SidebarContent,
@@ -185,7 +185,12 @@ const MapView = ({ center = { lat: 51.505, lng: -0.09 }, zoom = 3 }: MapViewProp
 
       {/* Location Details Sidebar */}
       {isSidebarOpen && selectedMarker && (
-        <div className="fixed inset-y-0 right-0 z-50 w-64 bg-white dark:bg-gray-800 shadow-lg transform transition-transform duration-300 ease-in-out">
+        <div 
+          className="fixed inset-y-0 right-0 z-[1000] w-64 bg-white dark:bg-gray-800 shadow-lg transform transition-all duration-300 ease-in-out"
+          style={{ 
+            boxShadow: '-5px 0 15px rgba(0,0,0,0.1)',
+          }}
+        >
           <div className="h-full flex flex-col">
             <div className="p-4 border-b">
               <div className="flex justify-between items-center">
@@ -195,9 +200,9 @@ const MapView = ({ center = { lat: 51.505, lng: -0.09 }, zoom = 3 }: MapViewProp
                 </h2>
                 <button 
                   onClick={closeSidebar}
-                  className="text-gray-500 hover:text-gray-700"
+                  className="text-gray-500 hover:text-gray-700 p-1 rounded-full hover:bg-gray-100 transition-colors"
                 >
-                  ✕
+                  <X size={18} />
                 </button>
               </div>
             </div>
