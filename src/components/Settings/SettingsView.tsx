@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -8,40 +7,18 @@ import { Separator } from "@/components/ui/separator";
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import WalletSection from './WalletSection';
+import { useAuth } from '@/context/AuthContext';
 
 const SettingsView = () => {
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [locationEnabled, setLocationEnabled] = useState(true);
   const [darkModeEnabled, setDarkModeEnabled] = useState(false);
-  const [userData, setUserData] = useState({
-    name: '',
-    email: '',
-    photoURL: ''
-  });
-  
-  useEffect(() => {
-    // Check if user data exists in localStorage (from Google authentication)
-    const authData = localStorage.getItem('authUser');
-    if (authData) {
-      try {
-        const parsedData = JSON.parse(authData);
-        setUserData({
-          name: parsedData.displayName || parsedData.name || 'User',
-          email: parsedData.email || '',
-          photoURL: parsedData.photoURL || ''
-        });
-      } catch (error) {
-        console.error('Error parsing authentication data:', error);
-      }
-    }
-  }, []);
   
   const handleLogout = () => {
-    // Clear auth data on logout
-    localStorage.removeItem('authUser');
+    logout();
     toast.success("Logged out successfully!");
-    navigate('/');
   };
   
   const toggleDarkMode = () => {
@@ -60,16 +37,16 @@ const SettingsView = () => {
         
         <div className="flex items-center justify-between py-2">
           <div className="flex items-center gap-3">
-            {userData.photoURL && (
+            {user?.photoURL && (
               <img 
-                src={userData.photoURL} 
+                src={user.photoURL} 
                 alt="Profile" 
                 className="w-10 h-10 rounded-full object-cover"
               />
             )}
             <div>
-              <p className="font-medium">{userData.name || 'User'}</p>
-              <p className="text-sm text-gray-500">{userData.email || 'No email available'}</p>
+              <p className="font-medium">{user?.displayName || 'User'}</p>
+              <p className="text-sm text-gray-500">{user?.email || 'No email available'}</p>
             </div>
           </div>
           <Button variant="outline" size="sm">Edit Profile</Button>

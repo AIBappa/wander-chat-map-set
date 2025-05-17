@@ -7,9 +7,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Mail, Phone } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { useAuth } from '@/context/AuthContext';
 
 const AuthPage = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [otp, setOtp] = useState('');
@@ -29,7 +31,7 @@ const AuthPage = () => {
       email: email,
       photoURL: null
     };
-    localStorage.setItem('authUser', JSON.stringify(mockUser));
+    login(mockUser);
     toast.success("Signed in successfully!");
     navigate('/app/map');
   };
@@ -56,7 +58,7 @@ const AuthPage = () => {
         email: null,
         photoURL: null
       };
-      localStorage.setItem('authUser', JSON.stringify(mockUser));
+      login(mockUser);
       toast.success("Signed in successfully!");
       navigate('/app/map');
     }
@@ -69,7 +71,7 @@ const AuthPage = () => {
       email: "user@gmail.com",
       photoURL: "https://lh3.googleusercontent.com/a/default-user"
     };
-    localStorage.setItem('authUser', JSON.stringify(mockGoogleUser));
+    login(mockGoogleUser);
     toast.success("Signed in with Google!");
     navigate('/app/map');
   };
