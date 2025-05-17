@@ -24,6 +24,12 @@ const AuthPage = () => {
     }
     
     // Mock authentication - replace with real auth in production
+    const mockUser = {
+      displayName: email.split('@')[0],
+      email: email,
+      photoURL: null
+    };
+    localStorage.setItem('authUser', JSON.stringify(mockUser));
     toast.success("Signed in successfully!");
     navigate('/app/map');
   };
@@ -45,6 +51,12 @@ const AuthPage = () => {
         return;
       }
       // Mock OTP verification - replace with real verification in production
+      const mockUser = {
+        displayName: `User-${phoneNumber.slice(-4)}`,
+        email: null,
+        photoURL: null
+      };
+      localStorage.setItem('authUser', JSON.stringify(mockUser));
       toast.success("Signed in successfully!");
       navigate('/app/map');
     }
@@ -52,6 +64,12 @@ const AuthPage = () => {
   
   const handleGoogleSignIn = () => {
     // Mock Google authentication - replace with real Google auth in production
+    const mockGoogleUser = {
+      displayName: "Google User",
+      email: "user@gmail.com",
+      photoURL: "https://lh3.googleusercontent.com/a/default-user"
+    };
+    localStorage.setItem('authUser', JSON.stringify(mockGoogleUser));
     toast.success("Signed in with Google!");
     navigate('/app/map');
   };
